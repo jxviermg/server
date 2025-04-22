@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-app.use(cors()); // para permitir que tu frontend en Netlify acceda
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -13,7 +13,6 @@ let ultimoDato = {
   gps: 'N/A'
 };
 
-// Endpoint para que Sigfox mande datos con PUT
 app.put('/api/sigfox', (req, res) => {
   const { id, time, temperature, lat, lng } = req.body;
 
@@ -28,7 +27,6 @@ app.put('/api/sigfox', (req, res) => {
   res.status(200).send('OK');
 });
 
-// Endpoint para que el frontend consulte datos
 app.get('/data', (req, res) => {
   res.json(ultimoDato);
 });
